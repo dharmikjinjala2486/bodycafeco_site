@@ -1,143 +1,23 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import { Star, ArrowRight, Heart, ShoppingCart, Leaf, Wind, ShieldCheck, HelpCircle, Sparkles } from "lucide-react";
+import RitualGrid from "./components/RitualGrid";
+import { ArrowRight, Leaf, Wind, ShieldCheck, HelpCircle, Sparkles } from "lucide-react";
 import logoWhite from "./assets/Body Cafe Co logo white.svg";
 
 export default function App() {
-  const [likedItems, setLikedItems] = useState({});
-
-  const toggleLike = (id) => {
-    setLikedItems((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
-
-  const products = [
-    {
-      id: "prod-1",
-      title: "Cold-Pressed Daily Greens",
-      category: "Nutrition",
-      price: "$12.00",
-      rating: 4.9,
-      reviews: 142,
-      badge: "Best Seller",
-      bgGradient: "from-emerald-400 to-teal-500",
-    },
-    {
-      id: "prod-2",
-      title: "Citrus Botanical Elixir",
-      category: "Energy",
-      price: "$14.50",
-      rating: 4.8,
-      reviews: 98,
-      badge: "New",
-      bgGradient: "from-amber-400 to-beetroot-primary",
-    },
-    {
-      id: "prod-3",
-      title: "Rose Petal Glow Cream",
-      category: "Skincare",
-      price: "$38.00",
-      rating: 5.0,
-      reviews: 215,
-      badge: "Organic",
-      bgGradient: "from-beetroot-soft to-rose-400",
-    },
-  ];
+  const [cartCount, setCartCount] = useState(2);
 
   return (
     <div className="min-h-screen bg-foundation-bg text-foundation-text relative selection:bg-beetroot-primary selection:text-white">
       {/* Premium Sticky Header */}
-      <Header />
+      <Header cartCount={cartCount} />
 
       {/* Hero Section */}
       <Hero />
 
-      {/* Mock Section: Shop */}
-      <section id="shop" className="py-24 max-w-7xl mx-auto px-6 md:px-12">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ltheanine-soft text-ltheanine-primary text-xs font-bold uppercase tracking-wider mb-3">
-            <Leaf className="w-3.5 h-3.5" />
-            Curated For You
-          </div>
-          <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-foundation-text mb-4">
-            Shop Our Best Sellers
-          </h2>
-          <p className="font-sans text-foundation-text-secondary text-lg">
-            Sourced ethically. Crafted with passion. Explore our signature collection of wellness elixirs and clean beauty rituals.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-3xl overflow-hidden border border-foundation-border shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between"
-            >
-              <div className="p-6 pb-0 relative">
-                {/* Badge */}
-                <span className="absolute top-8 left-8 z-10 bg-foundation-bg text-foundation-text text-xs font-extrabold px-3 py-1.5 rounded-full shadow-sm">
-                  {product.badge}
-                </span>
-
-                {/* Wishlist Button */}
-                <button
-                  id={`btn-wishlist-${product.id}`}
-                  aria-label="Add to wishlist"
-                  className="absolute top-8 right-8 z-10 w-9 h-9 rounded-full bg-foundation-surface/80 backdrop-blur-md flex items-center justify-center text-foundation-text hover:text-beetroot-primary transition-colors shadow-sm focus:outline-none"
-                  onClick={() => toggleLike(product.id)}
-                >
-                  <Heart
-                    className={`w-5 h-5 transition-all duration-300 ${
-                      likedItems[product.id] ? "fill-beetroot-primary text-beetroot-primary scale-110" : ""
-                    }`}
-                  />
-                </button>
-
-                {/* Abstract Premium Visual representing the product container */}
-                <div className={`w-full aspect-[4/3] rounded-2xl bg-gradient-to-br ${product.bgGradient} flex items-center justify-center relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-500`}>
-                  <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="w-24 h-24 rounded-full bg-white/20 blur-xl animate-pulse"></div>
-                  <div className="absolute font-display font-extrabold text-white text-opacity-20 text-5xl uppercase tracking-tighter select-none">
-                    {product.category}
-                  </div>
-                </div>
-              </div>
-
-              {/* Product Info */}
-              <div className="p-6">
-                <div className="flex items-center gap-1 mb-2 text-saffron-primary">
-                  <Star className="w-4 h-4 fill-saffron-primary" />
-                  <span className="text-xs font-bold text-foundation-text">{product.rating}</span>
-                  <span className="text-xs text-foundation-text-secondary">({product.reviews} reviews)</span>
-                </div>
-                
-                <h3 className="font-display font-bold text-xl text-foundation-text group-hover:text-beetroot-primary transition-colors duration-200 mb-1">
-                  {product.title}
-                </h3>
-                <p className="text-xs font-semibold text-foundation-text-secondary uppercase tracking-wider mb-4">
-                  {product.category}
-                </p>
-
-                <div className="flex items-center justify-between pt-4 border-t border-foundation-border">
-                  <span className="text-2xl font-display font-extrabold text-foundation-text">
-                    {product.price}
-                  </span>
-                  <button
-                    id={`btn-add-to-cart-${product.id}`}
-                    className="flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-foundation-surface hover:bg-beetroot-primary hover:text-white text-foundation-text font-sans font-bold text-sm transition-all duration-300 group/btn"
-                  >
-                    Add to Cart
-                    <ShoppingCart className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Premium 3x3 Ritual Grid Section */}
+      <RitualGrid onAddRitual={() => setCartCount((prev) => prev + 1)} />
 
       {/* Mock Section: Learn */}
       <section id="learn" className="bg-atmosphere-beetroot-100 py-24">
@@ -198,7 +78,7 @@ export default function App() {
                   100% Bioactive
                 </span>
               </div>
-              
+
               <div className="space-y-4 my-6">
                 <div className="flex justify-between text-sm border-b border-foundation-border pb-2">
                   <span className="font-medium text-foundation-text">Cold-Pressed Greens Complex</span>

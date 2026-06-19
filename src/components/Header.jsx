@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { User, ShoppingBag, Menu, X, ArrowRight } from "lucide-react";
 import logoImg from "../assets/Body Cafe Co logo Black.png";
 
-export default function Header() {
+export default function Header({ cartCount }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
-  const [cartCount, setCartCount] = useState(2); // Demo cart state
 
   // Navigation Links
   const navLinks = [
@@ -37,14 +36,13 @@ export default function Header() {
     <>
       <header
         id="main-header"
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
-          isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled
             ? "py-2.5 bg-foundation-bg/80 backdrop-blur-xl border-b border-foundation-border/30 shadow-[0_8px_30px_rgb(0,0,0,0.02)]"
             : "py-3 md:py-4 bg-transparent"
-        }`}
+          }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-between relative">
-          
+
           {/* Left: Large Prominent Logo Section */}
           <div className="flex-1 flex justify-start z-50">
             <a
@@ -56,12 +54,11 @@ export default function Header() {
                 setIsMobileMenuOpen(false);
               }}
             >
-              <img 
-                src={logoImg} 
-                alt="BODY CAFÉ CO." 
-                className={`w-auto object-contain transition-all duration-500 transform group-hover:scale-[1.02] origin-left ${
-                  isScrolled ? "h-8 md:h-9" : "h-10 md:h-14"
-                }`}
+              <img
+                src={logoImg}
+                alt="BODY CAFÉ CO."
+                className={`w-auto object-contain transition-all duration-500 transform group-hover:scale-[1.02] origin-left ${isScrolled ? "h-8 md:h-9" : "h-10 md:h-14"
+                  }`}
               />
             </a>
           </div>
@@ -76,16 +73,14 @@ export default function Header() {
                   id={link.id}
                   href={link.href}
                   onClick={() => setActiveLink(link.name)}
-                  className={`group relative font-sans text-[11px] md:text-xs font-bold tracking-[0.16em] uppercase py-2 transition-colors duration-300 outline-none ${
-                    isActive ? "text-beetroot-primary" : "text-foundation-text hover:text-beetroot-primary"
-                  }`}
+                  className={`group relative font-sans text-[11px] md:text-xs font-bold tracking-[0.16em] uppercase py-2 transition-colors duration-300 outline-none ${isActive ? "text-beetroot-primary" : "text-foundation-text hover:text-beetroot-primary"
+                    }`}
                 >
                   {link.name}
                   {/* Premium Dot Indicator */}
                   <span
-                    className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-current transition-all duration-500 ease-out ${
-                      isActive ? "opacity-100 scale-100" : "opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100"
-                    }`}
+                    className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-current transition-all duration-500 ease-out ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100"
+                      }`}
                   />
                 </a>
               );
@@ -136,11 +131,10 @@ export default function Header() {
       {/* Full screen Mobile Menu Drawer */}
       <div
         id="mobile-drawer"
-        className={`fixed inset-0 z-40 bg-foundation-bg/98 backdrop-blur-2xl transition-all duration-500 ease-in-out md:hidden flex flex-col justify-between p-8 pt-36 ${
-          isMobileMenuOpen
+        className={`fixed inset-0 z-40 bg-foundation-bg/98 backdrop-blur-2xl transition-all duration-500 ease-in-out md:hidden flex flex-col justify-between p-8 pt-36 ${isMobileMenuOpen
             ? "translate-y-0 opacity-100"
             : "-translate-y-full opacity-0 pointer-events-none"
-        }`}
+          }`}
       >
         <div className="absolute top-1/4 -left-12 w-64 h-64 rounded-full bg-saffron-primary/10 blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-1/4 -right-12 w-72 h-72 rounded-full bg-beetroot-primary/10 blur-3xl pointer-events-none"></div>
@@ -157,9 +151,8 @@ export default function Header() {
                   setActiveLink(link.name);
                   setIsMobileMenuOpen(false);
                 }}
-                className={`text-4xl font-display font-medium tracking-tight transition-all duration-300 inline-block ${
-                  isActive ? "text-beetroot-primary scale-105" : "text-foundation-text"
-                }`}
+                className={`text-4xl font-display font-medium tracking-tight transition-all duration-300 inline-block ${isActive ? "text-beetroot-primary scale-105" : "text-foundation-text"
+                  }`}
                 style={{ transitionDelay: `${idx * 75}ms` }}
               >
                 {link.name}
