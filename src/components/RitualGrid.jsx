@@ -23,15 +23,8 @@ export default function RitualGrid({ onAddRitual }) {
     }));
   };
 
-  const handleShopRitual = (productName, primaryColor, softBg) => {
-    if (onAddRitual) {
-      onAddRitual();
-    }
-    // Show toast
-    setToast({ name: productName, primaryColor, softBg });
-    setTimeout(() => {
-      setToast(null);
-    }, 3000);
+  const handleShopRitual = (id) => {
+    window.location.hash = `#product/${id}`;
   };
 
   const rituals = [
@@ -153,19 +146,7 @@ export default function RitualGrid({ onAddRitual }) {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
-        {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-foundation-surface text-foundation-text-secondary text-[10px] font-medium font-aileron uppercase tracking-[0.25em] mb-3">
-            Curated Wellness Collection
-          </div>
-          <h2 className="font-lemon text-4xl md:text-5xl font-normal tracking-[0.02em] text-foundation-text mb-4">
-            DISCOVER YOUR RITUAL
-          </h2>
-          <div className="w-12 h-[1px] bg-beetroot-primary/30 mx-auto mb-4"></div>
-          <p className="font-aileron font-light text-foundation-text-secondary text-sm md:text-base leading-relaxed max-w-md mx-auto">
-            Nine targeted formulations, each designed for a specific wellness goal.
-          </p>
-        </div>
+
 
         {/* 3x3 Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -196,7 +177,8 @@ export default function RitualGrid({ onAddRitual }) {
 
                 {/* Product Image Visual Area */}
                 <div 
-                  className="w-full h-28 md:h-32 rounded-2xl bg-white/40 backdrop-blur-[2px] flex items-center justify-center mb-4 transition-colors duration-500 group-hover:bg-white/70 overflow-hidden"
+                  onClick={() => handleShopRitual(ritual.id)}
+                  className="w-full h-28 md:h-32 rounded-2xl bg-white/40 backdrop-blur-[2px] flex items-center justify-center mb-4 transition-colors duration-500 group-hover:bg-white/70 overflow-hidden cursor-pointer"
                 >
                   <img
                     src={ritual.image}
@@ -222,7 +204,7 @@ export default function RitualGrid({ onAddRitual }) {
                   {/* Shop Ritual CTA */}
                   <div>
                     <button
-                      onClick={() => handleShopRitual(ritual.name, ritual.primaryColor, ritual.softBg)}
+                      onClick={() => handleShopRitual(ritual.id)}
                       className="inline-flex items-center gap-1.5 font-aileron font-bold text-[10px] uppercase tracking-[0.2em] transition-all duration-300 relative group/btn cursor-pointer py-1 focus:outline-none"
                       style={{ color: ritual.primaryColor }}
                     >

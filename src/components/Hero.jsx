@@ -95,7 +95,7 @@ export default function Hero() {
         >
           <a
             id="btn-hero-shop"
-            href="#shop"
+            href="#flagship-storytelling"
             className="inline-flex items-center justify-center px-8 py-4 bg-foundation-text hover:bg-beetroot-primary text-white font-sans font-bold text-xs tracking-[0.15em] uppercase rounded-full hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
           >
             Shop Collection
