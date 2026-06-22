@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -617,8 +618,8 @@ export default function ProductStorytelling() {
 
                     {/* Call To Actions */}
                     <div className="flex flex-col gap-2 pt-1 md:pt-2 w-full max-w-[280px]">
-                      <a
-                        href={`#product/${product.routeId}`}
+                      <Link
+                        to={`/product/${product.routeId}`}
                         style={{
                           background: product.btnGradient,
                           boxShadow: product.btnShadow,
@@ -626,9 +627,9 @@ export default function ProductStorytelling() {
                         className="w-full text-center px-4 md:px-6 py-2.5 md:py-3.5 text-white font-sans font-bold text-[10px] md:text-xs tracking-[0.15em] uppercase rounded-full transition-all duration-300 hover:scale-[1.02] hover:brightness-110 active:scale-[0.98] shadow-lg"
                       >
                         {product.ctaPrimary}
-                      </a>
-                      <a
-                        href={`#product/${product.routeId}`}
+                      </Link>
+                      <Link
+                        to={`/product/${product.routeId}`}
                         style={{
                           borderColor: "var(--active-border-color)",
                           color: "var(--active-text-primary)"
@@ -636,7 +637,7 @@ export default function ProductStorytelling() {
                         className="w-full text-center px-4 md:px-6 py-2 md:py-3 border font-sans font-bold text-[10px] md:text-xs tracking-[0.15em] uppercase rounded-full transition-all duration-300 hover:bg-[var(--active-accent-soft)] hover:scale-[1.02] active:scale-[0.98] hidden xs:block"
                       >
                         {product.ctaSecondary}
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 );
